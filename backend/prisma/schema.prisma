@@ -11,15 +11,30 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  name  String
-  bio   String?
-  posts Post[]
+  id       Int       @id @default(autoincrement())
+  name     String
+  username String    @unique
+  bio      String?
+  password String
+  posts    Post[]
+  comments Comment[]
+  created  DateTime  @default(now())
 }
 
 model Post {
-  id      Int    @id @default(autoincrement())
+  id      Int       @id @default(autoincrement())
   content String
-  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId  Int
+  Comment Comment[]
+}
+
+model Comment {
+  id      Int      @id @default(autoincrement())
+  content String
+  User    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  Int
+  post    Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId  Int
+  created DateTime @default(now())
 }
