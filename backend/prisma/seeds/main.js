@@ -1,21 +1,22 @@
-const {PrismaClient} = require("@prisma/client");
+const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
-const {UserSeeder} = require("./Userseeder");
-const {PostSeeder} = require("./PostSeeder");
-const {CommentSeeder} = require("./CommentSeeder");
+const { UserSeeder } = require("./UserSeeder");
+const { PostSeeder } = require("./PostSeeder");
+const { CommentSeeder } = require("./CommentSeeder");
 
 async function main() {
-  try {
-    await UserSeeder();
-    await PostSeeder();
-    await CommentSeeder();
-  } catch (e) {
-    console.log(e.message);
-  } finally {
-    await prisma.$disconnect();
-  }
+	try {
+		await UserSeeder();
+		await PostSeeder();
+		await CommentSeeder();
+	} catch (e) {
+		console.error(e);
+		process.exit(1);
+	} finally {
+		await prisma.$disconnect();
+	}
 }
 
 main();
