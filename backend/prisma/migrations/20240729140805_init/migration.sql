@@ -2,7 +2,7 @@
 CREATE TABLE "User" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "name" TEXT NOT NULL,
-    "usename" TEXT NOT NULL,
+    "username" TEXT NOT NULL,
     "bio" TEXT,
     "password" TEXT NOT NULL,
     "created" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -28,4 +28,4 @@ CREATE TABLE "Comment" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_usename_key" ON "User"("usename");
+CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
